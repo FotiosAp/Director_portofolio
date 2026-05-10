@@ -75,50 +75,51 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - Moved outside Nav for absolute stability */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[55] bg-black md:hidden"
+            className="fixed inset-0 z-[55] bg-dark md:hidden"
           >
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 overflow-hidden opacity-20">
-              <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-accent/20 blur-[120px] rounded-full"></div>
-              <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-accent/10 blur-[120px] rounded-full"></div>
+            {/* Simplified Background Elements for better performance */}
+            <div className="absolute inset-0 overflow-hidden opacity-10">
+              <div className="absolute top-0 left-0 w-full h-full bg-accent/10 blur-[60px] rounded-full"></div>
             </div>
 
+            {/* Close Button Inside Menu */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-8 right-6 text-white p-2 z-[70]"
+            >
+              <X size={40} strokeWidth={1.5} />
+            </button>
+
             <div className="relative h-full flex flex-col items-center justify-center">
-              <div className="flex flex-col space-y-10 text-center">
+              <div className="flex flex-col space-y-8 text-center">
                 {navLinks.map((link, idx) => (
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * idx, type: 'spring', damping: 20 }}
+                    transition={{ delay: 0.1 * idx }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-5xl font-serif font-bold text-white hover:text-accent transition-all duration-300 tracking-tighter"
+                    className="text-4xl font-serif font-bold text-white hover:text-accent transition-all duration-300"
                   >
                     {link.name}
                   </motion.a>
                 ))}
               </div>
               
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="absolute bottom-16 flex flex-col items-center space-y-6"
-              >
+              <div className="absolute bottom-12 flex flex-col items-center space-y-6">
                 <div className="flex space-x-8">
                   <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-[0.4em] font-bold">Instagram</a>
                   <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-[0.4em] font-bold">Vimeo</a>
                 </div>
-                <div className="w-px h-12 bg-gradient-to-b from-accent/50 to-transparent"></div>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -129,4 +130,3 @@ const Navbar = () => {
 
 
 export default Navbar;
-
