@@ -75,54 +75,43 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence mode="wait">
-        {isMobileMenuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-dark md:hidden flex flex-col items-center justify-center"
+      {/* Mobile Menu Overlay - No Animation for maximum stability */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-dark md:hidden flex flex-col items-center justify-center">
+          {/* Static Background Accent */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/20 blur-[100px] rounded-full"></div>
+          </div>
+
+          {/* Close Button Inside */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute top-8 right-6 text-white p-2"
           >
-            {/* Background Accent */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/20 blur-[100px] rounded-full"></div>
-            </div>
+            <X size={32} />
+          </button>
 
-            {/* Close Button Inside */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-8 right-6 text-white p-2 hover:text-accent transition-colors"
-            >
-              <X size={32} />
-            </button>
-
-            <div className="relative z-10 flex flex-col space-y-8 text-center">
-              {navLinks.map((link, idx) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * idx }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-4xl font-serif font-bold text-white hover:text-accent transition-all duration-300 tracking-tighter"
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              
-              <div className="pt-12 flex space-x-6 justify-center">
-                <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-widest font-bold">Instagram</a>
-                <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-widest font-bold">Vimeo</a>
-              </div>
+          <div className="relative z-10 flex flex-col space-y-8 text-center">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-4xl font-serif font-bold text-white hover:text-accent transition-colors tracking-tighter"
+              >
+                {link.name}
+              </a>
+            ))}
+            
+            <div className="pt-12 flex space-x-6 justify-center">
+              <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-widest font-bold">Instagram</a>
+              <a href="#" className="text-gray-500 hover:text-white transition-colors uppercase text-[10px] tracking-widest font-bold">Vimeo</a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </>
+
   );
 };
 

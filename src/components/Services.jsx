@@ -52,29 +52,25 @@ const Services = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
           {services.map((item, idx) => (
-            <motion.div
+            <div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-sm overflow-hidden hover:border-accent/40 transition-all duration-500 group relative"
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-sm overflow-hidden hover:border-accent/40 transition-all duration-300 group relative"
             >
               <div className="h-64 overflow-hidden relative">
-                <div 
-                   className="w-full h-full bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
-                   style={{ backgroundImage: `url(${item.image})` }}
+                <img 
+                   src={item.image}
+                   alt={item.title}
+                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-60"></div>
-                <div className="absolute top-4 left-4 w-10 h-10 bg-accent/90 text-dark flex items-center justify-center rounded-sm transform group-hover:rotate-12 transition-transform duration-500">
+                <div className="absolute top-4 left-4 w-10 h-10 bg-accent/90 text-dark flex items-center justify-center rounded-sm">
                   {item.icon}
                 </div>
               </div>
               <div className="p-8">
                 <h3 className="text-xl font-serif text-white mb-4 leading-tight group-hover:text-accent transition-colors">{item.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light h-20">
+                <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light min-h-[5rem]">
                   {item.description}
                 </p>
                 <a 
@@ -84,9 +80,10 @@ const Services = () => {
                   Inquire Now &rarr;
                 </a>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   );
