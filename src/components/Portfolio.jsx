@@ -47,7 +47,7 @@ const Portfolio = () => {
         </motion.div>
 
         {/* 2x2 Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 border border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 border border-white/10 bg-[#0a0a0a]">
           {projects.map((project, idx) => (
             <div 
               key={project.id}
@@ -57,24 +57,27 @@ const Portfolio = () => {
                 ${idx === 2 ? 'md:border-r' : ''}
               `}
             >
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{ backgroundImage: `url(${project.image})` }}
+              <img 
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
+                loading="eager"
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8 z-10">
                 <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="text-accent uppercase tracking-widest text-xs mb-2">{project.category}</p>
+                  <p className="text-accent uppercase tracking-widest text-[10px] mb-2">{project.category}</p>
                   <h3 className="text-3xl font-serif text-white mb-4">{project.title}</h3>
                   <div className="flex items-center text-white/70 space-x-2">
-                    <Play size={20} fill="currentColor" />
-                    <span className="text-sm uppercase tracking-widest">Watch Now</span>
+                    <Play size={18} fill="currentColor" />
+                    <span className="text-xs uppercase tracking-widest">Watch Now</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
